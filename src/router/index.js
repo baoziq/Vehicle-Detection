@@ -3,6 +3,8 @@ import MainPage from '../components/MainPage.vue';
 import LoginComponent from '../components/LoginComponent.vue';
 import RegisterComponent from '../components/RegisterComponent.vue';
 import VehicleDetection from '../components/VehicleDetection.vue'
+import SelectFunction from '../components/Choose.vue'
+import TrafficFlowRecognition from '../components/TrafficDetection.vue'
 
 const routes = [
   { path: '/', component: MainPage },
@@ -12,7 +14,14 @@ const routes = [
     path: '/detect',
     component: VehicleDetection,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/choose', component: SelectFunction
+  },
+  {
+    path: '/traffic', component: TrafficFlowRecognition
   }
+
 ];
 
 const router = createRouter({

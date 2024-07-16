@@ -20,7 +20,11 @@
         <button type="submit" class="recognize-button" @click.prevent="recognize" :disabled="uploadedImages.length === 0">识别</button>
         <div v-if="results.length > 0" class="result-container">
           <h2>识别结果：</h2>
-          <p class="first-result">{{ results.join(', ') }}</p>
+          <ul class="result-list">
+            <li v-for="(result, resultIndex) in results" :key="resultIndex">
+              <p class="result-class">{{ result.class }}</p>
+            </li>
+          </ul>
         </div>
         <div v-if="error" class="error">{{ error }}</div>
       </div>
@@ -52,21 +56,22 @@ export default {
       });
     },
     async recognize() {
-      this.results = [];
-      try {
-        const formData = new FormData();
-        this.uploadedImages.forEach(image => {
-          formData.append('image', image);
-        });
-        const response = await axios.post('http://192.168.0.66:5000/recognize', formData);
-        // Assuming response.data is an array of objects with a 'class' property
-        if (response.data.length > 0) {
-          this.results = response.data.map(result => result.class);
-        }
-      } catch (error) {
-        this.error = '识别失败';
-      }
-    },
+  this.results = [];
+  try {
+    const formData = new FormData();
+    this.uploadedImages.forEach(image => {
+      formData.append('image', image);
+    });
+    const response = await axios.post('http://192.168.2.23:5002/recognize', formData);
+    // Assuming response.data is an array of objects with a 'class' property for each result
+    if (response.data.length > 0) {
+      console.log(response.data)
+      this.results = response.data.map(result => ({ class: result.class }));
+    }
+  } catch (error) {
+    this.error = '识别失败';
+  }
+},
     deleteFile(index) {
       this.uploadedImages.splice(index, 1);
     },

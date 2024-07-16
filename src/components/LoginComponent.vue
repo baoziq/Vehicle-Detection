@@ -34,7 +34,7 @@ export default {
   methods: {
   async login() {
     try {
-      const response = await fetch('http://192.168.137.154:5001/api/login', {
+      const response = await fetch('http://192.168.2.23:5002/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ export default {
       if (response.ok) {
         console.log('Login successful:', data)
         localStorage.setItem('isAuthenticated', 'true')  // 存储身份验证状态
-        this.$router.push('/detect')  // 重定向到受保护的页面
+        this.$router.push('/choose')  // 重定向到受保护的页面
       } else {
         this.error = data.message || 'Login failed'
       }

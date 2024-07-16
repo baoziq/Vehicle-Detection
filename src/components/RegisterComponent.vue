@@ -34,7 +34,7 @@ export default {
   methods: {
     async register() {
       try {
-        const response = await fetch('http://192.168.137.154:5001/api/register', {
+        const response = await fetch('http://192.168.2.23:5002/api/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ export default {
         if (response.ok) {
           console.log('Registration successful:', data)
           // Redirect to login page after successful registration
-          this.$router.push('/')  // Assuming '/' is your login route
+          this.$router.push('/login')  
         } else {
           this.error = data.message || 'Registration failed'
         }
