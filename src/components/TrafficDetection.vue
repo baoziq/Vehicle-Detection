@@ -68,6 +68,32 @@ export default {
         const response = await axios.post('http://192.168.137.115:5000/recognize', formData);
         if (response.data) {
           this.recognitionSuccess = true;
+=======
+    methods: {
+      openFilePicker() {
+        document.getElementById('video-upload').click();
+      },
+      handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            file.preview = e.target.result;
+            this.uploadedVideo = file;
+          };
+          reader.readAsDataURL(file);
+        }
+      },
+      async recognize() {
+        try {
+          const formData = new FormData();
+          formData.append('video', this.uploadedVideo);
+          const response = await axios.post('http://192.168.0.220:5000/upload', formData);
+          if (response.data) {
+            this.$router.push({ name: 'RecognitionResults', params: { results: response.data } });
+          }
+        } catch (error) {
+          this.error = '识别失败';
         }
       } catch (error) {
         this.error = '识别失败';
