@@ -52,7 +52,7 @@
         try {
           const formData = new FormData();
           formData.append('video', this.uploadedVideo);
-          const response = await axios.post('http://192.168.137.115:5000/recognize', formData);
+          const response = await axios.post('http://192.168.0.220:5000/upload', formData);
           if (response.data) {
             this.$router.push({ name: 'RecognitionResults', params: { results: response.data } });
           }

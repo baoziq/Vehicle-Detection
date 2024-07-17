@@ -34,7 +34,7 @@ export default {
   methods: {
     async register() {
       try {
-        const response = await fetch('http://192.168.2.23:5002/api/register', {
+        const response = await fetch('http://192.168.0.161:5003/api/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
