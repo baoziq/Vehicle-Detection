@@ -7,7 +7,7 @@
           <label for="username">用户名：</label>
           <input type="text" v-model="username" required />
         </div>
-        <div class="input-group">
+        <div class="input-group">dd
           <label for="password">密码：</label>
           <input type="password" v-model="password" required />
         </div>
@@ -34,7 +34,7 @@ export default {
   methods: {
     async register() {
       try {
-        const response = await fetch('http://192.168.0.161:5003/api/register', {
+        const response = await fetch('http://127.0.0.1:5000/api/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

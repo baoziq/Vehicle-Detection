@@ -62,7 +62,7 @@ export default {
     this.uploadedImages.forEach(image => {
       formData.append('image', image);
     });
-    const response = await axios.post('http://192.168.2.23:5002/recognize', formData);
+    const response = await axios.post('http://127.0.0.1:5000/vehicle/recognize', formData);
     // Assuming response.data is an array of objects with a 'class' property for each result
     if (response.data.length > 0) {
       console.log(response.data)

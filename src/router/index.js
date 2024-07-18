@@ -11,12 +11,12 @@ const routes = [
   { path: '/login', component: LoginComponent },
   { path: '/register', component: RegisterComponent },
   {
-    path: '/detect',
-    component: VehicleDetection,
-    meta: { requiresAuth: true }
+    path: '/detect', component: VehicleDetection
   },
   {
-    path: '/choose', component: SelectFunction
+    path: '/choose', 
+    component: SelectFunction,
+    meta: { requiresAuth: true }
   },
   {
     path: '/traffic', component: TrafficFlowRecognition

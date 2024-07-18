@@ -4,10 +4,10 @@
         <h1>请选择功能</h1>
         <div class="button-group">
           <router-link to="/traffic">
-            <button class="main-button">车流量检测</button>
+            <button class="function-button">车流量检测</button>
           </router-link>
           <router-link to="/detect">
-            <button class="main-button">车型检测</button>
+            <button class="function-button">车型检测</button>
           </router-link>
         </div>
       </div>
