@@ -8,11 +8,7 @@
   
   <script>
   export default {
-    data() {
-      return {
-        userId: ''
-      }
-    },
+    name: 'DeleteUser',
     methods: {
       deleteUser() {
         // 在这里添加删除用户的逻辑
