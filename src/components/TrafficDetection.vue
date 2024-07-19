@@ -21,9 +21,7 @@
         <div v-if="isLoading" class="loading">加载中...</div>
         <div v-if="error" class="error">{{ error }}</div>
         <div v-if="recognitionSuccess" class="success">
-          识别成功！请选择要保存的文件夹
-          <input type="file" id="folder-picker" style="display: none;" webkitdirectory @change="handleFolderSelect" />
-          <button class="save-button" @click="openFolderPicker">选择文件夹</button>
+          识别成功！<a :href="downloadLink" download="output.mp4">点击这里下载识别后的视频</a>
         </div>
       </div>
     </div>
@@ -41,6 +39,7 @@ export default {
       isLoading: false,
       error: null,
       recognitionSuccess: false,
+      downloadLink: null,
     };
   },
   methods: {
@@ -62,11 +61,16 @@ export default {
       this.isLoading = true;
       this.error = null;
       this.recognitionSuccess = false;
+      this.downloadLink = null;
       try {
         const formData = new FormData();
         formData.append('video', this.uploadedVideo);
-        const response = await axios.post('http://127.0.0.1:5000/api/upload_video', formData);
+        const response = await axios.post('http://127.0.0.1:5000/traffic/recognize', formData, {
+          responseType: 'blob'
+        });
         if (response.data) {
+          const url = URL.createObjectURL(new Blob([response.data]));
+          this.downloadLink = url;
           this.recognitionSuccess = true;
         }
       } catch (error) {
@@ -78,23 +82,8 @@ export default {
     deleteFile() {
       this.uploadedVideo = null;
       this.recognitionSuccess = false;
-    },
-    openFolderPicker() {
-      document.getElementById('folder-picker').click();
-    },
-    handleFolderSelect(event) {
-      const folder = event.target.files;
-      if (folder.length > 0) {
-        // 处理将视频保存到选定的文件夹
-        this.saveVideoToFolder(folder[0].webkitRelativePath.split('/')[0]);
-      }
-    },
-    saveVideoToFolder(folderPath) {
-      const link = document.createElement('a');
-      link.href = this.uploadedVideo.preview;
-      link.download = `${folderPath}/${this.uploadedVideo.name}`;
-      link.click();
-    },
+      this.downloadLink = null;
+    }
   },
 };
 </script>
@@ -227,4 +216,3 @@ h1 {
   color: green;
 }
 </style>
- 

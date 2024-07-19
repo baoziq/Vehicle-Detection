@@ -5,10 +5,13 @@
     </div>
     <div class="button-container">
       <router-link to="/login">
-        <button class="main-button">登录</button>
+        <button class="main-button">用户登录</button>
+      </router-link>
+      <router-link to="/admin_login">
+        <button class="main-button">管理员登录</button>
       </router-link>
       <router-link to="/register">
-        <button class="main-button">注册</button>
+        <button class="main-button">用户注册</button>
       </router-link>
     </div>
   </div>

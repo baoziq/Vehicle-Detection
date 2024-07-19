@@ -5,6 +5,7 @@ import RegisterComponent from '../components/RegisterComponent.vue';
 import VehicleDetection from '../components/VehicleDetection.vue'
 import SelectFunction from '../components/Choose.vue'
 import TrafficFlowRecognition from '../components/TrafficDetection.vue'
+import AdminLogin from '../components/AdminLogin.vue'
 
 const routes = [
   { path: '/', component: MainPage },
@@ -20,6 +21,9 @@ const routes = [
   },
   {
     path: '/traffic', component: TrafficFlowRecognition
+  },
+  {
+    path: '/admin_login', component: AdminLogin
   }
 
 ];
