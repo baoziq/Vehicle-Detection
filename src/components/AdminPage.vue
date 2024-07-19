@@ -3,9 +3,18 @@
     <div class="container">
       <h1>管理员界面</h1>
       <div class="button-group">
-        <button @click="navigateTo('/delete')" class="function-button">删除用户</button>
-        <button @click="navigateTo('history')" class="function-button">查看用户历史记录</button>
-        <button @click="navigateTo('reset-password')" class="function-button">修改用户密码</button>
+        <router-link to="/delete">
+            <button class="function-button">删除用户</button>
+          </router-link>
+          <router-link to="/reset-password">
+            <button class="function-button">修改用户密码</button>
+          </router-link>
+          <router-link to="/history">
+            <button class="function-button">查看用户历史记录</button>
+          </router-link>
+          <router-link to="/userlist">
+            <button class="function-button">查看所有用户</button>
+          </router-link>
       </div>
       <router-view></router-view>
     </div>

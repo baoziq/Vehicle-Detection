@@ -10,6 +10,7 @@ import AdminPage from '@/components/AdminPage.vue';
 import DeleteUser from '@/components/DeleteUser.vue';
 import UserHistory from '@/components/UserHistory.vue';
 import ResetPassword from '@/components/ResetPassword.vue';
+import UserList from '@/components/UserList.vue';
 
 const routes = [
   { path: '/', component: MainPage },
@@ -43,7 +44,12 @@ const routes = [
   {
     path: '/reset-password',
     component: ResetPassword
+  },
+  {
+    path: '/userlist',
+    component: UserList
   }
+  
 ];
 
 const router = createRouter({

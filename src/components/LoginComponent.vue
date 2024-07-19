@@ -15,7 +15,7 @@
       </form>
       <div v-if="error" class="error">{{ error }}</div>
       <div class="register-link">
-        <span>Don't have an account? <router-link to="/Register">注册</router-link></span>
+        <span>没有账户？ <router-link to="/register">注册</router-link></span>
       </div>
     </div>
   </div>
@@ -29,36 +29,36 @@ export default {
       username: '',
       password: '',
       error: null
-    }
+    };
   },
   methods: {
-  async login() {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username: this.username,
-          password: this.password
-        })
-      })
-      const data = await response.json()
-      if (response.ok) {
-        console.log('Login successful:', data)
-        localStorage.setItem('isAuthenticated', 'true')  // 存储身份验证状态
-        this.$router.push('/choose')  // 重定向到受保护的页面
-      } else {
-        this.error = data.message || 'Login failed'
+    async login() {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: this.username,
+            password: this.password
+          })
+        });
+        const data = await response.json();
+        if (response.ok) {
+          console.log('登录成功:', data);
+          localStorage.setItem('username', this.username); // 存储用户名
+          localStorage.setItem('isAuthenticated', 'true'); // 存储身份验证状态
+          this.$router.push('/choose'); // 重定向到车辆识别页面
+        } else {
+          this.error = data.message || '登录失败';
+        }
+      } catch (error) {
+        this.error = '发生错误';
       }
-    } catch (error) {
-      this.error = 'An error occurred'
     }
   }
-}
-
-}
+};
 </script>
 
 <style scoped>

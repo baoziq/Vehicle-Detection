@@ -40,6 +40,7 @@ export default {
       error: null,
       recognitionSuccess: false,
       downloadLink: null,
+      username: localStorage.getItem('username') // 从 localStorage 获取用户名
     };
   },
   methods: {
@@ -65,9 +66,12 @@ export default {
       try {
         const formData = new FormData();
         formData.append('video', this.uploadedVideo);
+        formData.append('username', this.username); // 添加用户名字段到 FormData
+        
         const response = await axios.post('http://127.0.0.1:5000/traffic/recognize', formData, {
           responseType: 'blob'
         });
+        
         if (response.data) {
           const url = URL.createObjectURL(new Blob([response.data]));
           this.downloadLink = url;

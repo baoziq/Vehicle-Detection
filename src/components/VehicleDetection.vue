@@ -39,6 +39,7 @@ export default {
   name: 'VehicleRecognition',
   data() {
     return {
+      username: localStorage.getItem('username'), // 从 localStorage 获取用户名
       results: [],
       uploadedImages: [],
       error: null
@@ -56,22 +57,27 @@ export default {
       });
     },
     async recognize() {
-  this.results = [];
-  try {
-    const formData = new FormData();
-    this.uploadedImages.forEach(image => {
-      formData.append('image', image);
-    });
-    const response = await axios.post('http://127.0.0.1:5000/vehicle/recognize', formData);
-    // Assuming response.data is an array of objects with a 'class' property for each result
-    if (response.data.length > 0) {
-      console.log(response.data)
-      this.results = response.data.map(result => ({ class: result.class }));
-    }
-  } catch (error) {
-    this.error = '识别失败';
-  }
-},
+      this.results = [];
+      try {
+        const formData = new FormData();
+        this.uploadedImages.forEach(image => {
+          formData.append('image', image);
+        });
+        formData.append('username', this.username); // 添加用户名字段到 FormData
+        
+        const response = await axios.post('http://127.0.0.1:5000/vehicle/recognize', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        if (response.data.length > 0) {
+          this.results = response.data.map(result => ({ class: result.class }));
+        }
+      } catch (error) {
+        this.error = '识别失败';
+      }
+    },
     deleteFile(index) {
       this.uploadedImages.splice(index, 1);
     },
@@ -84,6 +90,7 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 body {
   font-family: 'Arial', sans-serif;
