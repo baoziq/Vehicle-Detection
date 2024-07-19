@@ -12,7 +12,7 @@
   
   <script>
   export default {
-    name: 'Admin',
+    name: 'AdminPage',
     methods: {
       navigateTo(action) {
         this.$router.push(`/admin/${action}`);

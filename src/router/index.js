@@ -6,6 +6,7 @@ import VehicleDetection from '../components/VehicleDetection.vue'
 import SelectFunction from '../components/Choose.vue'
 import TrafficFlowRecognition from '../components/TrafficDetection.vue'
 import AdminLogin from '../components/AdminLogin.vue'
+import AdminPage from '@/components/AdminPage.vue';
 
 const routes = [
   { path: '/', component: MainPage },
@@ -24,8 +25,10 @@ const routes = [
   },
   {
     path: '/admin_login', component: AdminLogin
+  },
+  {
+    path: '/admin', component: AdminPage
   }
-
 ];
 
 const router = createRouter({

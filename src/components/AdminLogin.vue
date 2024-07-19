@@ -45,7 +45,7 @@
         if (response.ok) {
           console.log('Login successful:', data)
           localStorage.setItem('isAuthenticated', 'true')  // 存储身份验证状态
-          this.$router.push('/choose')  // 重定向到受保护的页面
+          this.$router.push('/admin')  // 重定向到受保护的页面
         } else {
           this.error = data.message || 'Login failed'
         }
